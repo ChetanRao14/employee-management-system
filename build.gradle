@@ -18,7 +18,19 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter'
+	// Adds REST API capabilities and Tomcat server
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	// Adds Hibernate and Database mapping tools
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+	// Adds Jakarta Validation for request checking
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	// The MySQL Driver you already had
+	runtimeOnly 'com.mysql:mysql-connector-j'
+
+	// Testing tools
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
