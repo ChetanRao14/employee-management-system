@@ -1,9 +1,11 @@
 package com.ems.employee_management_system.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "employees")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Employee {
 
     @Id
@@ -16,14 +18,16 @@ public class Employee {
     @Column(nullable = false, unique = true)
     private String email;
 
-    // Many employees belong to one department
-    @ManyToOne
-    @JoinColumn(name = "department_id", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "department_id")
+    // This tells Jackson: "When loading the Department, ignore its 'employees' list so we don't loop forever."
+    @JsonIgnoreProperties({"employees", "projects"})
     private Department department;
 
-    // Many employees work on one project
-    @ManyToOne
-    @JoinColumn(name = "project_id", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "project_id")
+    // Same here for Project
+    @JsonIgnoreProperties({"employees", "department"})
     private Project project;
 
     // --- Getters and Setters ---

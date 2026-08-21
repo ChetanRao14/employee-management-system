@@ -2,9 +2,11 @@ package com.ems.employee_management_system.entity;
 
 import jakarta.persistence.*;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "departments")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Department {
 
     @Id
@@ -14,12 +16,12 @@ public class Department {
     @Column(nullable = false, unique = true)
     private String name;
 
-    // A department can have many employees
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("department")
     private List<Employee> employees;
 
-    // A department can have many projects
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("department")
     private List<Project> projects;
 
     // --- Getters and Setters ---
