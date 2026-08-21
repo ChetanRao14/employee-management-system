@@ -29,4 +29,16 @@ public class ProjectController {
         List<Project> projects = projectService.getAllProjects();
         return new ResponseEntity<>(projects, HttpStatus.OK);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Project> updateProject(@PathVariable Long id, @RequestBody Project projectDetails) {
+        Project updatedProject = projectService.updateProject(id, projectDetails);
+        return new ResponseEntity<>(updatedProject, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteProject(@PathVariable Long id) {
+        projectService.deleteProject(id);
+        return new ResponseEntity<>("Project deleted successfully.", HttpStatus.OK);
+    }
 }

@@ -31,4 +31,22 @@ public class DepartmentService {
         return departmentRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Department not found with id: " + id));
     }
+
+    // Business Logic: Update an existing department
+    public Department updateDepartment(Long id, Department departmentDetails) {
+        // First, check if it exists using the method we already wrote
+        Department existingDepartment = getDepartmentById(id);
+
+        // Update the fields
+        existingDepartment.setName(departmentDetails.getName());
+
+        // Save and return the updated entity
+        return departmentRepository.save(existingDepartment);
+    }
+
+    // Business Logic: Delete a department
+    public void deleteDepartment(Long id) {
+        Department existingDepartment = getDepartmentById(id);
+        departmentRepository.delete(existingDepartment);
+    }
 }

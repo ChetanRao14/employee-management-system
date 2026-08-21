@@ -31,4 +31,18 @@ public class DepartmentController {
         List<Department> departments = departmentService.getAllDepartments();
         return new ResponseEntity<>(departments, HttpStatus.OK);
     }
+
+    // PUT Request: Update an existing department
+    @PutMapping("/{id}")
+    public ResponseEntity<Department> updateDepartment(@PathVariable Long id, @RequestBody Department departmentDetails) {
+        Department updatedDepartment = departmentService.updateDepartment(id, departmentDetails);
+        return new ResponseEntity<>(updatedDepartment, HttpStatus.OK);
+    }
+
+    // DELETE Request: Delete a department
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteDepartment(@PathVariable Long id) {
+        departmentService.deleteDepartment(id);
+        return new ResponseEntity<>("Department deleted successfully.", HttpStatus.OK);
+    }
 }
