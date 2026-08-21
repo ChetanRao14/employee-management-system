@@ -29,4 +29,16 @@ public class EmployeeController {
         List<Employee> employees = employeeService.getAllEmployees();
         return new ResponseEntity<>(employees, HttpStatus.OK);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @RequestBody Employee employeeDetails) {
+        Employee updatedEmployee = employeeService.updateEmployee(id, employeeDetails);
+        return new ResponseEntity<>(updatedEmployee, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteEmployee(@PathVariable Long id) {
+        employeeService.deleteEmployee(id);
+        return new ResponseEntity<>("Employee deleted successfully.", HttpStatus.OK);
+    }
 }

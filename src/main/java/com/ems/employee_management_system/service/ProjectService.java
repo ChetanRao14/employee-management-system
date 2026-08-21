@@ -27,4 +27,24 @@ public class ProjectService {
         return projectRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Project not found with id: " + id));
     }
+
+    // Business Logic: Update an existing project
+    public Project updateProject(Long id, Project projectDetails) {
+        Project existingProject = getProjectById(id);
+
+        existingProject.setTitle(projectDetails.getTitle());
+
+        // Update relationship if provided
+        if (projectDetails.getDepartment() != null) {
+            existingProject.setDepartment(projectDetails.getDepartment());
+        }
+
+        return projectRepository.save(existingProject);
+    }
+
+    // Business Logic: Delete a project
+    public void deleteProject(Long id) {
+        Project existingProject = getProjectById(id);
+        projectRepository.delete(existingProject);
+    }
 }
