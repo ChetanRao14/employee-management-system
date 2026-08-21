@@ -1,6 +1,7 @@
 package com.ems.employee_management_system.service;
 
 import com.ems.employee_management_system.entity.Department;
+import com.ems.employee_management_system.exception.ResourceNotFoundException;
 import com.ems.employee_management_system.repository.DepartmentRepository;
 import org.springframework.stereotype.Service;
 
@@ -29,12 +30,12 @@ public class DepartmentService {
     // Business Logic: Find a department by its ID
     public Department getDepartmentById(Long id) {
         return departmentRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Department not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Department not found with id: " + id));
     }
 
     // Business Logic: Update an existing department
     public Department updateDepartment(Long id, Department departmentDetails) {
-        // First, check if it exists using the method we already wrote
+        //   First, check if it exists using the method we already wrote
         Department existingDepartment = getDepartmentById(id);
 
         // Update the fields

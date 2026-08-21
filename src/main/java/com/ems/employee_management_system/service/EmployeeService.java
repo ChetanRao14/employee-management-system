@@ -1,6 +1,7 @@
 package com.ems.employee_management_system.service;
 
 import com.ems.employee_management_system.entity.Employee;
+import com.ems.employee_management_system.exception.ResourceNotFoundException;
 import com.ems.employee_management_system.repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,7 @@ public class EmployeeService {
 
     public Employee getEmployeeById(Long id) {
         return employeeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Employee not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not found with id: " + id));
     }
 
     // Business Logic: Update an existing employee

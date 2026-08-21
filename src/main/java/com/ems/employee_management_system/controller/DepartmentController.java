@@ -45,4 +45,11 @@ public class DepartmentController {
         departmentService.deleteDepartment(id);
         return new ResponseEntity<>("Department deleted successfully.", HttpStatus.OK);
     }
+
+    // GET Request: Retrieve a single department by ID
+    @GetMapping("/{id}")
+    public ResponseEntity<Department> getDepartmentById(@PathVariable Long id) {
+        Department department = departmentService.getDepartmentById(id);
+        return new ResponseEntity<>(department, HttpStatus.OK);
+    }
 }
